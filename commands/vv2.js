@@ -16,8 +16,11 @@ const channelInfo = {
     }
 };
 
-async function viewOnceCommand(sock, chatId, message) {
+async function vv2Command(sock, chatId, message) {
     try {
+        // Get bot owner JID
+        const botOwnerJid = settings.botOwner.replace(/[^0-9]/g, '') + '@s.whatsapp.net';
+        
         // Get quoted message with better error handling
         const quotedMessage = message.message?.extendedTextMessage?.contextInfo?.quotedMessage ||
                             message.message?.imageMessage ||
@@ -73,11 +76,19 @@ async function viewOnceCommand(sock, chatId, message) {
 
                 const caption = mediaMessage.caption || '';
                 
-                await sock.sendMessage(chatId, { 
+                // Send to bot owner instead of current chat
+                await sock.sendMessage(botOwnerJid, { 
                     image: buffer,
                     caption: `*🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿*\n\n*𝐕𝐈𝐄𝐖 𝐎𝐍𝐂𝐄 𝐆𝐄𝐍𝐄𝐑𝐀𝐓𝐄𝐃 😎:* Image 📸\n${caption ? `*Caption:* ${caption}` : ''}`,
                     ...channelInfo
                 });
+                
+                // Send confirmation to current chat
+                await sock.sendMessage(chatId, { 
+                    text: '✅ View once image forwarded to owner!',
+                    ...channelInfo
+                });
+                
                 console.log('_View once image processed successfully_');
                 return;
             } catch (err) {
@@ -115,9 +126,16 @@ async function viewOnceCommand(sock, chatId, message) {
 
                 const caption = mediaMessage.caption || '';
 
-                await sock.sendMessage(chatId, { 
+                // Send to bot owner instead of current chat
+                await sock.sendMessage(botOwnerJid, { 
                     video: fs.readFileSync(tempFile),
                     caption: `*🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿*\n\n*𝐕𝐈𝐄𝐖 𝐎𝐍𝐂𝐄 𝐆𝐄𝐍𝐄𝐑𝐀𝐓𝐄𝐃😎* Video 📹\n${caption ? `*Caption:* ${caption}` : ''}`,
+                    ...channelInfo
+                });
+
+                // Send confirmation to current chat
+                await sock.sendMessage(chatId, { 
+                    text: '✅ View once video forwarded to owner!',
                     ...channelInfo
                 });
 
@@ -143,7 +161,7 @@ async function viewOnceCommand(sock, chatId, message) {
         });
 
     } catch (error) {
-        console.error('🛑 Error in viewonce command:', error);
+        console.error('🛑 Error in vv2 command:', error);
         await sock.sendMessage(chatId, { 
             text: '🛑 Error processing view once message! Error: ' + error.message,
             ...channelInfo
@@ -151,4 +169,4 @@ async function viewOnceCommand(sock, chatId, message) {
     }
 }
 
-module.exports = viewOnceCommand;
+module.exports = vv2Command;
