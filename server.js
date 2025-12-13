@@ -4,7 +4,7 @@ const path = require('path');
 const startpairing = require('./pair');
 
 const app = express();
-const PORT = process.env.PORT || 1812;
+const PORT = process.env.PORT || 1809;
 
 // Session limit configuration
 const MAX_SESSIONS = 50;

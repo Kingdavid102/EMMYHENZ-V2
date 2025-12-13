@@ -3,311 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanks for Deploying Emmy Henz Bot</title>
+    <title>SCARLET MD WEBSITE BOT</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            background-color: #0a0a16;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #25D366, #128C7E, #075E54);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            perspective: 1000px;
-        }
-        
-        .container {
-            text-align: center;
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-        }
-        
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-        
-        .text-container {
-            position: relative;
-            z-index: 1;
+            justify-content: center;
             padding: 20px;
         }
-        
-        h1 {
-            font-size: 5rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2rem;
-            opacity: 0;
-            transform: translateY(50px);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-            animation: fadeIn 2s forwards 0.5s;
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
         }
-        
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(50px);
-            color: #00ffff;
-            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-            animation: fadeIn 2s forwards 1s;
-        }
-        
-        .bot-name {
-            font-size: 3.5rem;
-            color: #ff00ff;
-            text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
-            display: block;
-            margin-top: 1rem;
-            opacity: 0;
-            transform: scale(0.5);
-            animation: zoomIn 2s forwards 2s;
-        }
-        
-        .message {
-            font-size: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-            opacity: 0;
-            animation: fadeIn 3s forwards 3s;
-        }
-        
-        .circle {
-            position: absolute;
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: #25D366;
             border-radius: 50%;
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 0 100px rgba(0, 255, 255, 0.2);
-            animation: pulse 8s infinite alternate;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
         }
-        
-        .circle:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            left: -150px;
-            animation-delay: 0s;
+
+        h1 {
+            color: #075E54;
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
         }
-        
-        .circle:nth-child(2) {
-            width: 500px;
-            height: 500px;
-            bottom: -250px;
-            right: -250px;
-            animation-delay: 1s;
-            background: rgba(255, 0, 255, 0.1);
-            box-shadow: 0 0 100px rgba(255, 0, 255, 0.2);
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
         }
-        
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
         }
-        
-        @keyframes zoomIn {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #075E54;
+            font-weight: 600;
+            font-size: 14px;
         }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(0.8);
-                opacity: 0.6;
-            }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
         }
-        
-        @keyframes glow {
-            0% {
-                text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-            }
-            50% {
-                text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 30px rgba(0, 255, 255, 0.5);
-            }
-            100% {
-                text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-            }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #25D366;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
         }
-        
-        .completed {
-            animation: glow 3s infinite;
+
+        .phone-hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            text-align: left;
         }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
+
+        .phone-hint strong {
+            color: #dc3545;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .pairing-code {
+            font-size: 24px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 2px dashed #25D366;
+            border-radius: 8px;
+            color: #075E54;
+        }
+
+        .sessions-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .sessions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .sessions-title {
+            font-size: 20px;
+            color: #075E54;
+            font-weight: 600;
+        }
+
+        .refresh-btn {
+            padding: 8px 16px;
+            background: #128C7E;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background: #075E54;
+        }
+
+        .sessions-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .session-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #25D366;
+        }
+
+        .session-info {
+            text-align: left;
+        }
+
+        .session-phone {
+            font-weight: 600;
+            color: #075E54;
+            font-size: 16px;
+        }
+
+        .session-status {
+            font-size: 12px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .session-time {
+            font-size: 11px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .delete-btn {
+            padding: 6px 12px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        .no-sessions {
+            text-align: center;
+            color: #666;
+            padding: 30px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
             h1 {
-                font-size: 3rem;
+                font-size: 24px;
             }
-            
-            h2 {
-                font-size: 1.8rem;
+
+            .session-item {
+                flex-direction: column;
+                align-items: flex-start;
             }
-            
-            .bot-name {
-                font-size: 2.5rem;
-            }
-            
-            .message {
-                font-size: 1.2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            .bot-name {
-                font-size: 1.8rem;
-            }
-            
-            .message {
-                font-size: 1rem;
+
+            .delete-btn {
+                margin-top: 10px;
+                align-self: flex-end;
             }
         }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    
-    <div class="circle"></div>
-    <div class="circle"></div>
-    
     <div class="container">
-        <div class="text-container">
-            <h1>Thank You</h1>
-            <h2>For Deploying</h2>
-            <span class="bot-name">Emmy Henz Bot</span>
-            <p class="message">Your deployment was successful. We appreciate your trust in our service. The bot is now ready to assist you with amazing features!</p>
+        <div class="logo">📱</div>
+        <h1>WhatsApp Pairing</h1>
+        <p class="subtitle">Generate pairing codes for WhatsApp connections</p>
+        
+        <form id="pairingForm">
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="e.g., 2348140825959" required>
+                <div class="phone-hint">
+                    <strong>Rules:</strong> Numbers only • No letters • Cannot start with 0 • Format: 2348140825959
+                </div>
+            </div>
+            
+            <button type="submit" id="submitBtn">
+                Generate Pairing Code
+            </button>
+        </form>
+
+        <div id="result" class="result">
+            <div id="resultMessage"></div>
+        </div>
+
+        <div class="sessions-section">
+            <div class="sessions-header">
+                <h3 class="sessions-title">Active Sessions</h3>
+                <button class="refresh-btn" onclick="loadSessions()">🔄 Refresh</button>
+            </div>
+            <div id="sessionsList" class="sessions-list">
+                <div class="no-sessions">Loading sessions...</div>
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        let isSubmitting = false;
+
+        document.getElementById('pairingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (isSubmitting) return;
+            
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const result = document.getElementById('result');
+            const resultMessage = document.getElementById('resultMessage');
+            
+            if (!phoneNumber) {
+                showResult('Please enter a phone number', 'error');
+                return;
+            }
+            
+            // Client-side validation
+            const cleanedNumber = phoneNumber.replace(/\D/g, '');
+            
+            if (cleanedNumber.startsWith('0')) {
+                showResult('Phone numbers cannot start with 0', 'error');
+                return;
+            }
+            
+            if (!/^\d+$/.test(cleanedNumber)) {
+                showResult('Phone numbers can only contain digits', 'error');
+                return;
+            }
+            
+            if (cleanedNumber.length < 10) {
+                showResult('Phone number must be at least 10 digits', 'error');
+                return;
+            }
+            
+            if (cleanedNumber.length > 15) {
+                showResult('Phone number cannot exceed 15 digits', 'error');
+                return;
+            }
+            
+            isSubmitting = true;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span>Generating Code...';
+            result.style.display = 'none';
+            
+            try {
+                const response = await fetch('/request-pairing', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ phoneNumber: cleanedNumber })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultMessage.innerHTML = `
+                        <div>✅ Pairing code generated successfully!</div>
+                        <div style="margin: 10px 0;">Phone: <strong>+${data.phoneNumber}</strong></div>
+                        <div class="pairing-code">${data.pairingCode}</div>
+                        <div style="font-size: 14px; color: #666;">
+                            Enter this code in your WhatsApp app when prompted
+                        </div>
+                    `;
+                    showResult('', 'success');
+                    
+                    // Clear form and refresh sessions
+                    document.getElementById('phoneNumber').value = '';
+                    setTimeout(() => loadSessions(), 1000);
+                    
+                } else {
+                    showResult(data.error || 'Failed to generate pairing code', 'error');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showResult('Network error. Please check your connection and try again.', 'error');
+            } finally {
+                isSubmitting = false;
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Generate Pairing Code';
+            }
+        });
+        
+        function showResult(message, type) {
+            const result = document.getElementById('result');
+            const resultMessage = document.getElementById('resultMessage');
+            
+            if (message) {
+                resultMessage.innerHTML = message;
+            }
+            
+            result.className = `result ${type}`;
+            result.style.display = 'block';
+            
+            // Auto hide error messages after 5 seconds
+            if (type === 'error') {
+                setTimeout(() => {
+                    result.style.display = 'none';
+                }, 5000);
+            }
+        }
+        
+        async function loadSessions() {
+            const sessionsList = document.getElementById('sessionsList');
+            sessionsList.innerHTML = '<div class="no-sessions">Loading sessions...</div>';
+            
+            try {
+                const response = await fetch('/sessions');
+                const data = await response.json();
+                
+                if (data.success && data.sessions.length > 0) {
+                    sessionsList.innerHTML = data.sessions.map(session => `
+                        <div class="session-item">
+                            <div class="session-info">
+                                <div class="session-phone">+${session.phoneNumber}</div>
+                                <div class="session-status">Status: ${session.status}</div>
+                                <div class="session-time">
+                                    ${session.createdAt ? `Created: ${new Date(session.createdAt).toLocaleString()}` : 
+                                      session.loadedAt ? `Loaded: ${new Date(session.loadedAt).toLocaleString()}` : ''}
+                                </div>
+                            </div>
+                            <button class="delete-btn" onclick="deleteSession('${session.phoneNumber}')">
+                                🗑️ Delete
+                            </button>
+                        </div>
+                    `).join('');
+                } else {
+                    sessionsList.innerHTML = '<div class="no-sessions">No active sessions found</div>';
+                }
+            } catch (error) {
+                console.error('Error loading sessions:', error);
+                sessionsList.innerHTML = '<div class="no-sessions">Error loading sessions</div>';
+            }
+        }
+        
+        async function deleteSession(phoneNumber) {
+            if (!confirm(`Are you sure you want to delete the session for +${phoneNumber}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/session/${phoneNumber}`, {
+                    method: 'DELETE'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(`Session for +${phoneNumber} deleted successfully`, 'success');
+                    setTimeout(() => loadSessions(), 500);
+                } else {
+                    showResult(data.error || 'Failed to delete session', 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting session:', error);
+                showResult('Error deleting session', 'error');
+            }
+        }
+        
+        // Format phone number input as user types
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+            e.target.value = value;
+        });
+        
+        // Load sessions when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                particles: {
-                    number: {
-                        value: 80,
-                        density: {
-                            enable: true,
-                            value_area: 800
-                        }
-                    },
-                    color: {
-                        value: "#ffffff"
-                    },
-                    shape: {
-                        type: "circle",
-                        stroke: {
-                            width: 0,
-                            color: "#000000"
-                        }
-                    },
-                    opacity: {
-                        value: 0.5,
-                        random: true,
-                        anim: {
-                            enable: true,
-                            speed: 1,
-                            opacity_min: 0.1,
-                            sync: false
-                        }
-                    },
-                    size: {
-                        value: 3,
-                        random: true,
-                        anim: {
-                            enable: true,
-                            speed: 2,
-                            size_min: 0.3,
-                            sync: false
-                        }
-                    },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: "#00ffff",
-                        opacity: 0.4,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 2,
-                        direction: "none",
-                        random: true,
-                        straight: false,
-                        out_mode: "out",
-                        bounce: false,
-                        attract: {
-                            enable: false,
-                            rotateX: 600,
-                            rotateY: 1200
-                        }
-                    }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: {
-                            enable: true,
-                            mode: "grab"
-                        },
-                        onclick: {
-                            enable: true,
-                            mode: "push"
-                        },
-                        resize: true
-                    },
-                    modes: {
-                        grab: {
-                            distance: 140,
-                            line_linked: {
-                                opacity: 1
-                            }
-                        },
-                        push: {
-                            particles_nb: 4
-                        }
-                    }
-                },
-                retina_detect: true
-            });
+            loadSessions();
             
-            
-            setTimeout(() => {
-                document.querySelector('h1').classList.add('completed');
-                document.querySelector('h2').classList.add('completed');
-                document.querySelector('.bot-name').classList.add('completed');
-            }, 5000);
+            // Refresh sessions every 30 seconds
+            setInterval(loadSessions, 30000);
+        });
+        
+        // Add copy functionality for pairing codes
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('pairing-code')) {
+                navigator.clipboard.writeText(e.target.textContent.trim()).then(() => {
+                    const originalText = e.target.textContent;
+                    e.target.textContent = 'Copied!';
+                    setTimeout(() => {
+                        e.target.textContent = originalText;
+                    }, 2000);
+                });
+            }
         });
     </script>
 </body>

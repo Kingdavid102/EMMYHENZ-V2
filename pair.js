@@ -56,6 +56,25 @@ const idch = [
   "120363410694173688@newsletter"
 ];
 
+// Process stability
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection:', reason);
+});
+
+// Memory monitoring
+setInterval(() => {
+    const memUsage = process.memoryUsage();
+    const memMB = Math.round(memUsage.heapUsed / 1024 / 1024);
+    if (memMB > 300) {
+        console.log(`High memory usage: ${memMB}MB`);
+        if (global.gc) global.gc();
+    }
+}, 30 * 60 * 1000);
+
 function cleanSessionFiles(folderPath) {
     if (fs.existsSync(folderPath)) {
         fs.readdirSync(folderPath).forEach(file => {
@@ -253,7 +272,9 @@ async function startpairing(kingbadboiNumber) {
 }
 
 function setupEventHandlers(bad, saveCreds, kingbadboiNumber) {
-    // Keep-alive monitoring
+    // Connection health monitoring
+    let lastMessageReceived = Date.now();
+    let connectionValidator;
     let keepAliveFailures = 0;
     let keepAliveInterval;
     
@@ -279,6 +300,26 @@ function setupEventHandlers(bad, saveCreds, kingbadboiNumber) {
         }, KEEP_ALIVE_INTERVAL);
     };
     
+    const startConnectionValidator = () => {
+    if (connectionValidator) clearInterval(connectionValidator);
+    
+    connectionValidator = setInterval(async () => {
+        const timeSinceLastMessage = Date.now() - lastMessageReceived;
+        
+        if (timeSinceLastMessage > 20 * 60 * 1000) {
+            try {
+                await bad.sendPresenceUpdate('composing');
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                await bad.sendPresenceUpdate('available');
+                console.log('Connection health check passed');
+            } catch (error) {
+                console.log('Connection health check failed, reconnecting...');
+                bad.end(new Error('Health check failed'));
+            }
+        }
+    }, 10 * 60 * 1000);
+};
+    
     bad.decodeJid = (jid) => {
         if (!jid) return jid;
         if (/:\d+@/gi.test(jid)) {
@@ -290,6 +331,7 @@ function setupEventHandlers(bad, saveCreds, kingbadboiNumber) {
     };
     
 bad.ev.on('messages.upsert', async chatUpdate => {
+        lastMessageReceived = Date.now(); // ADD THIS LINE
 
         try {
 
@@ -298,6 +340,40 @@ bad.ev.on('messages.upsert', async chatUpdate => {
             if (!mek.message) return
 
             mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
+            
+            // ADD YOUR AUTOREACT CODE HERE - RIGHT AFTER MESSAGE PROCESSING
+        const jid = mek.key.remoteJid;
+        
+        // ONLY YOUR NEWSLETTER JID
+        const myNewsletter = "120363410694173688@newsletter"; 
+        if (jid && jid === myNewsletter) {
+            try {
+                const { emojis } = require('./autoreact');
+                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                const messageId = mek.newsletterServerId;
+
+                if (!messageId) {
+                    console.warn('No newsletterServerId found in message:', mek);
+                    return;
+                }
+
+                let retries = 3;
+                while (retries-- > 0) {
+                    try {
+                        await bad.newsletterReactMessage(jid, messageId.toString(), randomEmoji);
+                        console.log(`✅ Reacted to YOUR newsletter ${jid} with ${randomEmoji}`);
+                        break;
+                    } catch (err) {
+                        console.warn(`❌ Reaction attempt failed (${3 - retries}/3):`, err.message);
+                        await sleep(1500);
+                    }
+                }
+            } catch (error) {
+                console.error('⚠️ Newsletter reaction handler failed:', error.message);
+            }
+            return; // Don't process newsletter messages further
+        }
+        // END OF AUTOREACT CODE
 
             if (mek.key && mek.key.remoteJid === 'status@broadcast') {
 
@@ -554,6 +630,10 @@ bad.ev.on('messages.upsert', async chatUpdate => {
                 clearInterval(keepAliveInterval);
                 keepAliveInterval = null;
             }
+            if (connectionValidator) {
+                clearInterval(connectionValidator);
+                connectionValidator = null;
+            }
 
             // Initialize counter for this session if needed
             if (retryCountMap[kingbadboiNumber] === undefined) {
@@ -675,17 +755,19 @@ bad.ev.on('messages.upsert', async chatUpdate => {
             // Reset retry counter on successful connection
             delete retryCountMap[kingbadboiNumber];
             
-            // Start keep-alive monitoring
+            // Start connection monitoring
             startKeepAliveMonitor();
+            startConnectionValidator();
             
             console.log(chalk.bgBlue(`✅ ${kingbadboiNumber} is now ONLINE!`));
             bad.newsletterFollow("120363317747980810@newsletter") //mine
             bad.newsletterFollow("120363410694173688@newsletter") //mine
+            
             // ADD THIS LINE - Set default bio on startup
     await setDefaultBioOnStartup(bad);
     
             console.log(chalk.green.bold(`𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1 is online.`));
-            console.log(chalk.cyan(`< ====================[ 𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1-RENTBOT ]========================= >`));
+            console.log(chalk.cyan(`< ====================[ 𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2-RENTBOT ]========================= >`));
         } else if (connection === "connecting") {
             console.log(chalk.yellow(`🔄 Connecting ${kingbadboiNumber}...`));
         }

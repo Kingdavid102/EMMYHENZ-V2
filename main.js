@@ -15,6 +15,8 @@ const { addWelcome, delWelcome, isWelcomeOn, addGoodbye, delGoodBye, isGoodByeOn
 const tagAllCommand = require("./commands/tagall")
 const helpCommand = require("./commands/help")
 const banCommand = require("./commands/ban")
+const catboxCommand = require("./commands/catbox")
+const vv2Command = require("./commands/vv2")
 const { promoteCommand } = require("./commands/promote")
 const { anticallCommand, handleIncomingCall } = require('./commands/anticall');
 const { kickallCommand } = require('./commands/kickall');
@@ -75,6 +77,48 @@ const {
     shorturlCommand,
     translateCommand 
 } = require('./commands/multiplugin');
+const { 
+    
+    // Productivity
+    reminderCommand,
+    calculatorCommand,
+    passwordCommand,
+    hashCommand,
+    base64Command,
+    binaryCommand,
+    timestampCommand,
+    encryptCommand,
+    decryptCommand,
+    
+    // Entertainment
+    diceCommand,
+    coinCommand,
+    randomCommand,
+    pickCommand,
+    ageCommand,
+    riddleCommand,
+    roastCommand,
+    
+    // Text Analysis
+    countCommand,
+    reverseCommand,
+    caseCommand,
+    palindromeCommand,
+    
+    // Group Activities
+    pollCommand,
+    voteCommand,
+    resultsCommand,
+    
+    // Currency & Crypto
+    currencyCommand,
+    cryptoCommand,
+    
+    // Group Management
+    slowmodeCommand,
+    lockgroupCommand,
+    unlockgroupCommand
+} = require('./commands/multipluggin2');
 const { pmpermitCommand, pmapproveCommand, pmblockCommand, handlePmPermit, isPmPermitEnabled } = require('./commands/pmpermit');
 const { handleChatbotCommand, handleChatbotResponse } = require("./commands/chatbot")
 const { savecontactCommand } = require('./commands/savecontact');
@@ -134,7 +178,7 @@ const channelInfo = {
     isForwarded: false,
     forwardedNewsletterMessageInfo: {
       newsletterJid: "120363317747980810@newsletter",
-      newsletterName: "𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1",
+      newsletterName: "🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿",
       serverMessageId: -1,
     },
   },
@@ -283,7 +327,7 @@ if (userMessage.startsWith(".")) {
       if (!isBotAdmin) {
         await sock.sendMessage(
           chatId,
-          { text: "𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1 must be an admin to use admin commands.", ...channelInfo },
+          { text: "🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿 must be an admin to use admin commands.", ...channelInfo },
           { quoted: message },
         )
         return
@@ -524,6 +568,151 @@ case userMessage.startsWith(".unblock"):
         const text = userMessage.slice(4).trim()
         await ttsCommand(sock, chatId, text, message)
         break
+
+// ===========================
+// PRODUCTIVITY COMMANDS
+// ===========================
+case userMessage.startsWith(".reminder"):
+    const reminderArgs = userMessage.split(" ").slice(1);
+    await reminderCommand(sock, chatId, message, reminderArgs);
+    break;
+
+case userMessage.startsWith(".calculator") || userMessage.startsWith(".calc"):
+    const calcArgs = userMessage.startsWith(".calculator") ? 
+        userMessage.split(" ").slice(1) : userMessage.split(" ").slice(1);
+    await calculatorCommand(sock, chatId, message, calcArgs);
+    break;
+
+case userMessage.startsWith(".password") || userMessage.startsWith(".pass"):
+    const passArgs = userMessage.startsWith(".password") ? 
+        userMessage.split(" ").slice(1) : userMessage.split(" ").slice(1);
+    await passwordCommand(sock, chatId, message, passArgs);
+    break;
+
+case userMessage.startsWith(".hash"):
+    const hashArgs = userMessage.split(" ").slice(1);
+    await hashCommand(sock, chatId, message, hashArgs);
+    break;
+
+case userMessage.startsWith(".base64"):
+    const base64Args = userMessage.split(" ").slice(1);
+    await base64Command(sock, chatId, message, base64Args);
+    break;
+
+case userMessage.startsWith(".binary"):
+    const binaryArgs = userMessage.split(" ").slice(1);
+    await binaryCommand(sock, chatId, message, binaryArgs);
+    break;
+
+case userMessage === ".timestamp":
+    await timestampCommand(sock, chatId, message, []);
+    break;
+    
+
+// ===========================
+// ENTERTAINMENT COMMANDS
+// ===========================
+case userMessage.startsWith(".dice"):
+    const diceArgs = userMessage.split(" ").slice(1);
+    await diceCommand(sock, chatId, message, diceArgs);
+    break;
+
+case userMessage === ".coin":
+    await coinCommand(sock, chatId, message, []);
+    break;
+
+case userMessage.startsWith(".random"):
+    const randomArgs = userMessage.split(" ").slice(1);
+    await randomCommand(sock, chatId, message, randomArgs);
+    break;
+
+case userMessage.startsWith(".pick"):
+    const pickArgs = userMessage.split(" ").slice(1);
+    await pickCommand(sock, chatId, message, pickArgs);
+    break;
+
+case userMessage.startsWith(".age"):
+    const ageArgs = userMessage.split(" ").slice(1);
+    await ageCommand(sock, chatId, message, ageArgs);
+    break;
+
+case userMessage === ".riddle":
+    await riddleCommand(sock, chatId, message, []);
+    break;
+
+case userMessage === ".roast":
+    await roastCommand(sock, chatId, message, []);
+    break;
+
+// ===========================
+// TEXT ANALYSIS COMMANDS
+// ===========================
+case userMessage.startsWith(".count"):
+    const countArgs = userMessage.split(" ").slice(1);
+    await countCommand(sock, chatId, message, countArgs);
+    break;
+
+case userMessage.startsWith(".reverse"):
+    const reverseArgs = userMessage.split(" ").slice(1);
+    await reverseCommand(sock, chatId, message, reverseArgs);
+    break;
+
+case userMessage.startsWith(".case"):
+    const caseArgs = userMessage.split(" ").slice(1);
+    await caseCommand(sock, chatId, message, caseArgs);
+    break;
+
+case userMessage.startsWith(".palindrome"):
+    const palindromeArgs = userMessage.split(" ").slice(1);
+    await palindromeCommand(sock, chatId, message, palindromeArgs);
+    break;
+
+// ===========================
+// GROUP ACTIVITY COMMANDS
+// ===========================
+case userMessage.startsWith(".poll"):
+    const pollArgs = userMessage.split(" ").slice(1);
+    await pollCommand(sock, chatId, message, pollArgs);
+    break;
+
+case userMessage.startsWith(".vote"):
+    const voteArgs = userMessage.split(" ").slice(1);
+    await voteCommand(sock, chatId, message, voteArgs);
+    break;
+
+case userMessage.startsWith(".results"):
+    const resultsArgs = userMessage.split(" ").slice(1);
+    await resultsCommand(sock, chatId, message, resultsArgs);
+    break;
+
+// ===========================
+// CURRENCY & CRYPTO COMMANDS
+// ===========================
+case userMessage.startsWith(".currency"):
+    const currencyArgs = userMessage.split(" ").slice(1);
+    await currencyCommand(sock, chatId, message, currencyArgs);
+    break;
+
+case userMessage.startsWith(".crypto"):
+    const cryptoArgs = userMessage.split(" ").slice(1);
+    await cryptoCommand(sock, chatId, message, cryptoArgs);
+    break;
+
+// ===========================
+// GROUP MANAGEMENT COMMANDS
+// ===========================
+case userMessage.startsWith(".slowmode"):
+    const slowmodeArgs = userMessage.split(" ").slice(1);
+    await slowmodeCommand(sock, chatId, message, slowmodeArgs);
+    break;
+
+case userMessage === ".lockgroup" || userMessage === ".lock":
+    await lockgroupCommand(sock, chatId, message, []);
+    break;
+
+case userMessage === ".unlockgroup" || userMessage === ".unlock":
+    await unlockgroupCommand(sock, chatId, message, []);
+    break;
       case userMessage === ".delete" || userMessage === ".del":
         await deleteCommand(sock, chatId, message, senderId)
         break
@@ -533,7 +722,7 @@ case userMessage.startsWith(".unblock"):
       case userMessage.startsWith(".mode"):
         // Check if sender is the owner
         if (!message.key.fromMe) {
-          await sock.sendMessage(chatId, { text: "Only 𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1 owner can use this command!", ...channelInfo })
+          await sock.sendMessage(chatId, { text: "Only 🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿 owner can use this command!", ...channelInfo })
           return
         }
         // Read current data first
@@ -578,9 +767,15 @@ case userMessage.startsWith(".unblock"):
           await sock.sendMessage(chatId, { text: "Failed to update bot access mode", ...channelInfo })
         }
         break
+        case userMessage.startsWith(".tourl") || userMessage.startsWith(".url") || userMessage.startsWith(".upload"):
+    await catboxCommand(sock, chatId, message);
+    break;
       case userMessage === ".owner":
         await ownerCommand(sock, chatId)
         break
+        case userMessage === ".vv2":
+    await vv2Command(sock, chatId, message);
+    break;
       case userMessage === ".tagall":
         if (isSenderAdmin || message.key.fromMe) {
           await tagAllCommand(sock, chatId, senderId, message)
@@ -607,7 +802,7 @@ case userMessage.startsWith(".unblock"):
         }
         if (!isBotAdmin) {
           await sock.sendMessage(chatId, {
-            text: "𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1 Has To Be Admin To Carry Out This Task.",
+            text: "🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿 Has To Be Admin To Carry Out This Task.",
             ...channelInfo,
           })
           return
@@ -721,6 +916,15 @@ case userMessage.startsWith(".unblock"):
         const mentionedJidListDemote = message.message.extendedTextMessage?.contextInfo?.mentionedJid || []
         await demoteCommand(sock, chatId, mentionedJidListDemote, message)
         break
+        case userMessage.startsWith(".encrypt"):
+    const encryptArgs = userMessage.split(" ").slice(1);
+    await encryptCommand(sock, chatId, message, encryptArgs);
+    break;
+
+case userMessage.startsWith(".decrypt"):
+    const decryptArgs = userMessage.split(" ").slice(1);
+    await decryptCommand(sock, chatId, message, decryptArgs);
+    break;
       case userMessage === ".ping":
         await pingCommand(sock, chatId, message)
         break
@@ -789,7 +993,7 @@ case userMessage.startsWith(".unblock"):
         isBotAdmin = adminStatus.isBotAdmin
 
         if (!isBotAdmin) {
-          await sock.sendMessage(chatId, { text: "*𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1 must be admin to use this feature*", ...channelInfo })
+          await sock.sendMessage(chatId, { text: "*🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿 must be admin to use this feature*", ...channelInfo })
           return
         }
 
@@ -1103,7 +1307,7 @@ async function handleGroupParticipantUpdate(sock, update) {
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
               newsletterJid: channelId,
-              newsletterName: "𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1",
+              newsletterName: "🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿",
               serverMessageId: -1,
             },
           },
@@ -1140,7 +1344,7 @@ async function handleGroupParticipantUpdate(sock, update) {
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
               newsletterJid: channelId,
-              newsletterName: "𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1",
+              newsletterName: "🌿❄𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕2❄🌿",
               serverMessageId: -1,
             },
           },
