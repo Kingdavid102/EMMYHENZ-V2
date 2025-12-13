@@ -131,7 +131,7 @@ async function connectWithCredentials(kingbadboiNumber) {
         logger: pino({ level: "silent" }),
         printQRInTerminal: false,
         auth: state,
-        version: [2, 3000, 1023223821],
+        version: [2, 3000, 1027934701],
         browser: Browsers.ubuntu("Edge"),
         getMessage: async key => {
             const jid = jidNormalizedUser(key.remoteJid);
@@ -199,7 +199,7 @@ async function startpairing(kingbadboiNumber) {
         logger: pino({ level: "silent" }),
         printQRInTerminal: false,
         auth: state,
-        version: [2, 3000, 1023223821],
+        version: [2, 3000, 1027934701],
         browser: Browsers.ubuntu("Edge"),
         getMessage: async key => {
             const jid = jidNormalizedUser(key.remoteJid);
