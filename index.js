@@ -60,7 +60,7 @@ let msgRetryCounterCache = new NodeCache({
 const CONNECTION_TIMEOUT = 30000;
 const KEEP_ALIVE_INTERVAL = 20000;
 const MAX_KEEP_ALIVE_FAILURES = 3;
-const PORT = process.env.PORT || 3000  // Use environment port or fallback to 3000
+const PORT = 7860
 const MAX_RETRIES = 3;
 const retryCountMap = {};
 
@@ -157,7 +157,7 @@ async function connectToWhatsApp() {
 
     store.bind(sock.ev);
     
-    console.log("𝗘𝗡𝗧𝗘𝗥 𝗬𝗢𝗨𝗥 𝗣𝗛𝗢𝗡𝗘 𝗡𝗨𝗠𝗕𝗘𝗥: E.g 234912**") 
+    console.log("𝐄𝐍𝐓𝐄𝐑 𝐘𝐎𝐔𝐑 𝐏𝐇𝐎𝐍𝐄 𝐍𝐔𝐌𝐁𝐄𝐑, 𝐄.𝐠 2349125****") 
 
   
     if (!state.creds.registered) {
@@ -593,7 +593,7 @@ function setupEventHandlers(sock, saveCreds) {
        
             startKeepAliveMonitor();
             
-            console.log(chalk.bgBlue(`✅ 𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1 is now ONLINE!`));
+            console.log(chalk.bgBlue(`✅ WhatsApp is now ONLINE!`));
             
      
             for (const newsletter of idch) {
@@ -660,6 +660,6 @@ http.createServer((req, res) => {
         res.end('404: Not Found');
     }
 }).listen(PORT, () => {
-    console.log(`\n𝐄𝐌𝐌𝐘𝐇𝐄𝐍𝐙-𝐕1 is running on port ${PORT}`);
+    console.log(`\n❤️‍🔥 𝐄𝐌𝐌𝐘𝐇𝐄𝐍-𝐕1 is running on port ${PORT}`);
     console.log(`🔗 Local access: http://localhost:${PORT}\n`);
 });
